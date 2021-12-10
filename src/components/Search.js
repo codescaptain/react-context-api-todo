@@ -11,7 +11,7 @@ function Search () {
         <div className="container__search">
             <h1>Todo</h1>
             <input 
-                    placeholder="Type to add a note's title"
+                    placeholder="Search Task..."
                     onChange={handleTitle}
                     value={title}
                     />

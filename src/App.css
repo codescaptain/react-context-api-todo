@@ -66,6 +66,7 @@ input{
   -o-appearance:          none;
   appearance:             none;
   box-shadow : none; 
+  border:none;
 }
 input:focus, textarea:focus{
   outline: none;
@@ -91,3 +92,8 @@ textarea{
   width: 70px;
   border-radius: 7px;
 }
+.container__search > input {
+font-weight: 600;
+font-size: 18px;
+}
+
