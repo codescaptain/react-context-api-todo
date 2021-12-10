@@ -3,10 +3,8 @@ import { createContext,useState,useEffect } from "react";
 const TodoContext = createContext();
 
 export const TodoProvider = ({children}) => {
-    const [todoList, setTodoList] = useState([
-        {title: 'DenemeTodo', description: 'Hello world', date: new Date().toLocaleDateString().replaceAll('.','/')},
-        {title: 'DenemeTodo2', description: 'Hello world', date: new Date().toLocaleDateString().replaceAll('.','/')},
-    ]);
+    const initialState = JSON.parse(localStorage.getItem("todos")) || []
+    const [todoList, setTodoList] = useState(initialState);
 
     const [filterText, setFilterText] = useState('');
 
@@ -28,7 +26,7 @@ export const TodoProvider = ({children}) => {
     });
 
     useEffect(()=>{
-        console.log('Degisti');
+        localStorage.setItem('todos', JSON.stringify(todoList))
     },[todoList])
 
     const values = {
