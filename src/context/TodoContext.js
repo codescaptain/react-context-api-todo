@@ -1,4 +1,4 @@
-import { createContext,useState } from "react";
+import { createContext,useState,useEffect } from "react";
 
 const TodoContext = createContext();
 
@@ -8,6 +8,8 @@ export const TodoProvider = ({children}) => {
         {title: 'DenemeTodo2', description: 'Hello world', date: new Date().toLocaleDateString().replaceAll('.','/')},
     ]);
 
+    const [filterText, setFilterText] = useState('');
+
     const addTask = (title, description, date = new Date().toLocaleDateString().replaceAll('.','/') ) => {
         setTodoList([...todoList, {title, description, date}])
     }
@@ -16,20 +18,26 @@ export const TodoProvider = ({children}) => {
         setTodoList(todoList.filter((_, i) => i !== index))
     }
 
-    const search = (title) => {
-        const value = title;
-        const todos = todoList.filter(todo => {
-          return todo.title.toLowerCase().includes(value);
-        })
-       console.log(value)
-     }
+    const searchTask = todoList.filter((item) => {
+        return Object.keys(item).some((key => {
+            return item[key]
+            .toString()
+            .toLowerCase()
+            .includes(filterText.toLocaleLowerCase());
+        }))
+    });
+
+    useEffect(()=>{
+        console.log('Degisti');
+    },[todoList])
 
     const values = {
         todoList,
         setTodoList,
         addTask,
         removeTask,
-        search
+        setFilterText,
+        searchTask        
     } 
     return(
         <TodoContext.Provider value={values}>{children}</TodoContext.Provider>

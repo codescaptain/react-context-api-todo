@@ -1,8 +1,8 @@
 import {useContext, useState} from 'react'
 import TodoContext from '../context/TodoContext';
-import { FaTrashAlt, FaPlus } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 export default function TodoList() {
-    const {todoList, addTask, removeTask} = useContext(TodoContext)
+    const {searchTask, addTask, removeTask} = useContext(TodoContext)
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -25,9 +25,12 @@ export default function TodoList() {
     const handleDescription = (e) => {
         setDescription(e.target.value)
     }
+
+ 
+
     return (
         <div className='container__todo-list'>
-            {todoList.map((todo, index) => (
+            {searchTask.map((todo, index) => (
 
                 <div className='todo' key={index}>
                     <div className='todo__title'>
@@ -57,7 +60,6 @@ export default function TodoList() {
                     ></textarea>
                     <input type="submit" className='todo__submit' value="Add" />
                 </form>
-
             </div>
         </div>
     )
