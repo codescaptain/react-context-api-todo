@@ -8,9 +8,14 @@ export const TodoProvider = ({children}) => {
 
     const [filterText, setFilterText] = useState('');
 
-    const addTask = (title, description, date = new Date().toLocaleDateString().replaceAll('.','/') ) => {
-        setTodoList([...todoList, {title, description, date}])
+    /*
+     @param value object
+    */
+    const addTask = (value) => {
+        value.date = new Date().toLocaleDateString().replaceAll('.','/');
+        setTodoList([...todoList,value])
     }
+
 
     const removeTask = (index) => {
         setTodoList(todoList.filter((_, i) => i !== index))
